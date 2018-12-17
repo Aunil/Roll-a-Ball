@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour {
 	public float speed;
 	private Rigidbody rb;
 	private int count;
+	public float jumpForce;
 	public Text countText;
 	public Text wintext;
 	public float disToGround = 0.5f;
@@ -22,12 +23,13 @@ public class PlayerControl : MonoBehaviour {
 	void FixedUpdate(){
 
 		//Debug.Log (isGrounded());
-		if (Input.GetKeyDown ("r")) {
-			transform.position = Startpos;
+		if (transform.position.y < -10) {
+			transform.position = Startpos + new Vector3 (0, 10, 0);
+			GetComponent<Rigidbody> ().velocity = new Vector3 (0, 0, 0);
 		}
 
 		if (Input.GetKey(KeyCode.Space)&& isGrounded()) {
-			rb.AddForce (0, 500f, 0);
+			rb.AddForce (0,jumpForce, 0);
 		}
 
 
